@@ -3,7 +3,7 @@ Country Explorer is a React-based web application that allows users to explore i
 
 
 ### Live Demo
-View the Hosted App Here -> 
+View the Hosted App Here -> https://rest-countries-app-deploy.vercel.app/
 
 
 ### Features
@@ -35,8 +35,7 @@ Jest
 React Testing Library
 
 ## Deployment
-Frontend: Render
-Backend: Render
+Frontend: Vercel
 
 
 ### API Endpoints Used
