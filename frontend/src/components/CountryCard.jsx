@@ -108,9 +108,10 @@ const CountryCard = ({ country }) => {
   return (
     <Card
       sx={{
-        width: { xs: "100%", sm: 345 },
+        // width: { xs: "100%", sm: 345 },
+        width: 345,
         height: 400,
-        display: "flex",
+        // display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         borderRadius: 2,

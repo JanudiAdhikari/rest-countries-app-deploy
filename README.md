@@ -1,12 +1,13 @@
-### Overview
+# Overview
 Country Explorer is a React-based web application that allows users to explore information about countries worldwide using data from the REST Countries API. The application features search, filtering, detailed country views, and user authentication for saving favorite countries.
 
 
-### Live Demo
-View the Hosted App Here -> https://rest-countries-app-deploy.vercel.app/
+# Live Demo
+https://rest-countries-app-deploy.vercel.app/
+[View the Hosted App Here]
 
 
-### Features
+# Features
 * Country Browsing: View a comprehensive list of all countries with key information
 * Detailed Country View: Click on any country to view in-depth details
 * Search Functionality: Find countries by name
@@ -17,7 +18,7 @@ View the Hosted App Here -> https://rest-countries-app-deploy.vercel.app/
 * Dark/Light Mode: Toggle between visual themes
 
 
-### Technologies Used
+# Technologies Used
 ## Frontend
 React
 Vite
@@ -38,7 +39,7 @@ React Testing Library
 Frontend: Vercel
 
 
-### API Endpoints Used
+# API Endpoints Used
 The application consumes the following endpoints from REST Countries API (v3.1):
 
 * GET /all - Fetch all countries
@@ -47,20 +48,20 @@ The application consumes the following endpoints from REST Countries API (v3.1):
 * GET /alpha/{code} - Get country details by alpha code
 
 
-### Getting Started
+# Getting Started
 ## Prerequisites
 Node.js (v18 or higher)
 npm or yarn
 MongoDB (for local development)
 
 ## Installation
-# Clone the repository
+### Clone the repository
 ```
 git clone https://github.com/SE1020-IT2070-OOP-DSA-25/af-2-JanudiAdhikari.git
 cd af-2-JanudiAdhikari
 ```
 
-# Install dependencies
+### Install dependencies
 Install frontend dependencies
 ```
 cd frontend
@@ -69,18 +70,18 @@ npm install
 
 Install backend dependencies
 ```
-cd backend
+cd ../backend
 npm install
 ```
 
 ## Environment setup
 Create .env files in both frontend and backend directories.
-# frontend .env
+### frontend .env
 ```
 VITE_API_URL=http://localhost:5000/api
 ```
 
-# backend .env
+### backend .env
 ```
 MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/dbname
 JWT_SECRET=your_jwt_secret
@@ -88,7 +89,7 @@ PORT=5000
 ```
 
 
-### Running the application
+# Running the application
 ## Start backend server
 ```
 cd backend
@@ -104,7 +105,7 @@ npm run dev
 The frontend will be available at http://localhost:5173 and the backend at http://localhost:5000.
 
 
-### Testing
+# Testing
 ## Run frontend tests
 ```
 cd frontend

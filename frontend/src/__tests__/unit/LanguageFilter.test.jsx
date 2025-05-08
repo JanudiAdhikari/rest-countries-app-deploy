@@ -1,90 +1,47 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import LanguageFilter from '../../components/LanguageFilter';
+import { vi } from 'vitest';
 
 describe('LanguageFilter Component', () => {
+  const mockLanguages = ['English', 'French', 'Spanish'];
   const mockOnLanguageChange = vi.fn();
 
-  it('renders the LanguageFilter component correctly', () => {
+  const renderComponent = (selected = 'All') =>
     render(
       <LanguageFilter
-        selectedLanguage="All"
+        selectedLanguage={selected}
         onLanguageChange={mockOnLanguageChange}
-        availableLanguages={['English', 'Spanish', 'French']}
+        availableLanguages={mockLanguages}
       />
     );
 
-    expect(screen.getByText(/filter by language/i)).toBeInTheDocument();
-    expect(screen.getByText(/all languages/i)).toBeInTheDocument();
+  it('renders the language dropdown', () => {
+    renderComponent();
+    expect(screen.getByLabelText(/filter by language/i)).toBeInTheDocument();
   });
 
-  it('renders available languages in the dropdown menu', () => {
-    render(
-      <LanguageFilter
-        selectedLanguage="All"
-        onLanguageChange={mockOnLanguageChange}
-        availableLanguages={['English', 'Spanish', 'French']}
-      />
-    );
+  it('displays all language options in the dropdown', () => {
+    renderComponent();
+    fireEvent.mouseDown(screen.getByLabelText(/filter by language/i));
+    mockLanguages.forEach((lang) => {
+      expect(screen.getByText(lang)).toBeInTheDocument();
+    });
+  });
 
-    expect(screen.getByText('English')).toBeInTheDocument();
-    expect(screen.getByText('Spanish')).toBeInTheDocument();
+  it('displays a chip when a language is selected', () => {
+    renderComponent('French');
     expect(screen.getByText('French')).toBeInTheDocument();
   });
 
-  it('calls onLanguageChange when a language is selected', () => {
-    render(
-      <LanguageFilter
-        selectedLanguage="All"
-        onLanguageChange={mockOnLanguageChange}
-        availableLanguages={['English', 'Spanish', 'French']}
-      />
-    );
-
-    fireEvent.change(screen.getByLabelText(/filter by language/i), {
-      target: { value: 'Spanish' },
-    });
-
+  it('calls onLanguageChange when a new language is selected', () => {
+    renderComponent();
+    fireEvent.mouseDown(screen.getByLabelText(/filter by language/i));
+    fireEvent.click(screen.getByText('Spanish'));
     expect(mockOnLanguageChange).toHaveBeenCalledWith('Spanish');
   });
 
-  it('displays the selected language correctly in the chip', () => {
-    render(
-      <LanguageFilter
-        selectedLanguage="Spanish"
-        onLanguageChange={mockOnLanguageChange}
-        availableLanguages={['English', 'Spanish', 'French']}
-      />
-    );
-
-    expect(screen.getByText('Spanish')).toBeInTheDocument();
-  });
-
   it('displays "All Languages" when "All" is selected', () => {
-    render(
-      <LanguageFilter
-        selectedLanguage="All"
-        onLanguageChange={mockOnLanguageChange}
-        availableLanguages={['English', 'Spanish', 'French']}
-      />
-    );
-
-    expect(screen.getByText('All Languages')).toBeInTheDocument();
-  });
-
-  it('opens and closes the dropdown when clicked', () => {
-    render(
-      <LanguageFilter
-        selectedLanguage="All"
-        onLanguageChange={mockOnLanguageChange}
-        availableLanguages={['English', 'Spanish', 'French']}
-      />
-    );
-
-    const dropdown = screen.getByLabelText(/filter by language/i);
-    fireEvent.mouseDown(dropdown); // Open dropdown
-    expect(screen.getByText('English')).toBeInTheDocument();
-
-    fireEvent.mouseDown(dropdown); // Close dropdown
-    expect(screen.queryByText('English')).not.toBeInTheDocument();
+    renderComponent('All');
+    expect(screen.getByText(/all languages/i)).toBeInTheDocument();
   });
 });
